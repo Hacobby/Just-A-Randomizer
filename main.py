@@ -34,7 +34,7 @@ while gate:
 
     time.sleep(2)
 
-    entries = input("Enter para continuar")
+    entries = input("Enter para continuar\n")
     if entries == "exit":
         gate = False
         print("Goodbye")
