@@ -38,6 +38,7 @@ while gate:
     if entries == "exit":
         gate = False
         print("Goodbye")
+        time.sleep(1)
         break
 
     clear()
