@@ -1,12 +1,13 @@
 import random
 import os
-import platform
 import time
+import json
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 gate = True
+count = 0
 
 while gate:
     print("--- Just A Randomizer ---")
@@ -20,7 +21,7 @@ while gate:
     actors = [""] * entries
     for i in range(0, entries):
         actors[i] = input("Nombre del actor [" + str(i+1) +"]: ")
-    stage = {name : 0 for name in actors}
+    stage = {name : 0 for name in actors} #Adjust to new logic
 
     rolls = int(input("Cantidad de rolls: "))
     for i in range(rolls):
@@ -40,5 +41,10 @@ while gate:
         print("Goodbye")
         time.sleep(1)
         break
+    if entries == "save":
+        print("Guardando...")
+        with open("resultados " +str(count) +".json", "w") as archivo:
+            json.dump(stage, archivo, indent=4)
 
+    count += 1
     clear()
