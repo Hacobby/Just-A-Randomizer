@@ -1,50 +1,34 @@
 import random
 import os
-import time
 import json
+from UI import UI
+import tkinter as tk
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-gate = True
-count = 0
+class Logic:
+    def __init__(self):
+        self.count = 1
+        self.actors = []
+        self.stage = {}
 
-while gate:
-    print("--- Just A Randomizer ---")
-    entries = input("Cantidad de entradas: ")
-    if entries == "exit":
-        gate = False
-        print("Goodbye")
-        break
-    entries = int(entries)
+    def loadActors(self, names):
+        self.actors = names
+        self.stage = {name: 0 for name in self.actors}
 
-    actors = [""] * entries
-    for i in range(0, entries):
-        actors[i] = input("Nombre del actor [" + str(i+1) +"]: ")
-    stage = {name : 0 for name in actors} #Adjust to new logic
+    def roll(self, quantity):
+        for i in range(quantity):
+            winner = random.choice(self.actors)
+            self.stage[winner] += 1
 
-    rolls = int(input("Cantidad de rolls: "))
-    for i in range(rolls):
-        rWinner = random.choice(actors)
-        stage[rWinner] += 1
+    def saveResults(self):
+        with open(f"resultados {self.count}.json", "w") as file:
+            json.dump(self.stage, file, indent=4)
+            self.count += 1
 
-    print("Resultados: ")
-    for i in stage:
-        time.sleep(1)
-        print(i, stage[i])
-
-    time.sleep(2)
-
-    entries = input("Enter para continuar\n")
-    if entries == "exit":
-        gate = False
-        print("Goodbye")
-        time.sleep(1)
-        break
-    if entries == "save":
-        print("Guardando...")
-        with open("resultados " +str(count) +".json", "w") as archivo:
-            json.dump(stage, archivo, indent=4)
-
-    count += 1
-    clear()
+if __name__ == "__main__":
+    root = tk.Tk()
+    appLogic = Logic()
+    ui = UI(root, appLogic)
+    root.mainloop()
