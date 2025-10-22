@@ -46,7 +46,7 @@ class UI:
         tk.Label(bottomLeftFrame, textvariable=self.results).grid(column=1, row=3, sticky=tk.E, padx=5, pady=5)
 
         #Botones
-        tk.Button(topLeftFrame, text="Roll", command=self.sort).grid(column=2, row=1, sticky=tk.W, padx=5, pady=5)
+        tk.Button(topLeftFrame, text="Roll", command=self.sort).grid(column=2, row=2, sticky=tk.W, padx=5, pady=5)
         tk.Button(topLeftFrame, text="Generar slots", command=self.genFields).grid(column=2, row=0, sticky=tk.W, padx=5, pady=5)
         tk.Button(bottomLeftFrame, text="Guardar resultados", command=self.logic.saveResults).grid(column=2, row=3, sticky=tk.W, padx=5, pady=5)
 
